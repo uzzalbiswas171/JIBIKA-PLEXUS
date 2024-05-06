@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:jibica_plexus/CustomWidget/CustomText/custom_text.dart';
 import 'package:jibica_plexus/constant.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({Key? key}) : super(key: key);
@@ -111,42 +112,83 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                   children: [
                     Row(
                       children: [
-                        Expanded(child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(11),
-                                  topLeft: Radius.circular(11),
-                              ),
-                        //    color: Colors.greenAccent
-                          ),
-                          child: Center(
-                            child: CircleAvatar(
-                              radius: 70,
-                              backgroundColor: barColor,
-                              child: CircleAvatar(
-                                radius: 50,
-                                backgroundColor: Colors.white,
+                        Expanded(
+                            child: Stack(
+                              children: [
+                                Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(11),
+                                      topLeft: Radius.circular(11),
+                                  ),
+                                                        //    color: Colors.greenAccent
+                                                          ),
+                                                          child: Center(
                                 child: CircleAvatar(
-                                  radius: 45,
-                                  backgroundColor: Colors.black,
+                                  radius: 80,
+                                 // backgroundColor: Colors.white,
                                   child: CircleAvatar(
-                                    radius: 43,
+                                    radius: 50,
                                     backgroundColor: Colors.white,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        CustomText(text: "93%", fontSize: 21, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: barColor,),
-                                        CustomText(text: "Present", fontSize: 15, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.black45,),
-                    
-                                      ],
+                                    child: CircleAvatar(
+                                      radius: 45,
+                                      backgroundColor: Colors.black,
+                                      child: CircleAvatar(
+                                        radius: 43,
+                                        backgroundColor: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            CustomText(text: "93%", fontSize: 21, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: barColor,),
+                                            CustomText(text: "Present", fontSize: 15, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.black45,),
+
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        )),
+                                                          ),
+                                                        ),
+
+
+                                Positioned(
+                                  top: 13,
+                                  left: 23,
+                                  child: CircularPercentIndicator(
+                                    radius: 67.0,
+                                    lineWidth: 16.0,
+                                    percent: 0.88,
+                                    backgroundColor: Colors.grey.withOpacity(0),
+                                    progressColor: Colors.red,
+                                  ),),
+
+
+                                Positioned(
+                                  top: 13,
+                                  left: 23,
+                                  child: CircularPercentIndicator(
+                                    radius: 67.0,
+                                    lineWidth: 16.0,
+                                    percent: 0.95,
+                                    backgroundColor: Colors.grey.withOpacity(0),
+                                    progressColor: Colors.yellow,
+                                  ),),
+
+                                Positioned(
+                                  top: 10,
+                                  left: 20,
+                                  child: CircularPercentIndicator(
+                                    radius: 70.0,
+                                    lineWidth: 20.0,
+                                    percent: 0.8,
+                                    backgroundColor: Colors.grey.withOpacity(0),
+                                    progressColor: barColor,
+                                  ),),
+
+                              ],
+                            )),
                         ///Second part start
                         Expanded(
                             child: Container(
@@ -333,7 +375,10 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                     )
                   ],
                 ),
-              )
+              ),
+
+               
+
             ],
           ),
         ),
