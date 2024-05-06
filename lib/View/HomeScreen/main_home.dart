@@ -184,7 +184,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 1,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
@@ -195,11 +197,18 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                             ),
                                           ],
                                         )),
-                                        Expanded(child: Row(
+
+                                        Expanded(
+                                            flex: 2,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
+                                            Spacer(),
+                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
+                                            ,Spacer(),
                                             CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: barColor,),
+                                            Spacer(),
                                           ],
                                         )),
                                       ],
@@ -211,7 +220,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 1,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
@@ -222,11 +233,17 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                             ),
                                           ],
                                         )),
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 2,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
+                                            Spacer(),
+                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
+                                            ,Spacer(),
                                             CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.red.shade300),
+                                            Spacer(),
                                           ],
                                         )),
                                       ],
@@ -238,7 +255,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 1,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
@@ -249,11 +268,17 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                             ),
                                           ],
                                         )),
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 2,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
+                                            Spacer(),
+                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
+                                            ,Spacer(),
                                             CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: barColor.withOpacity(0.5),),
+                                            Spacer(),
                                           ],
                                         )),
                                       ],
@@ -265,7 +290,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 1,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
@@ -276,11 +303,17 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                             ),
                                           ],
                                         )),
-                                        Expanded(child: Row(
+                                        Expanded(
+                                            flex: 2,
+                                            child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
+                                            Spacer(),
+                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
+                                            ,Spacer(),
                                             CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color:  Colors.indigo.withOpacity(0.7),),
+                                            Spacer(),
                                           ],
                                         )),
                                       ],
