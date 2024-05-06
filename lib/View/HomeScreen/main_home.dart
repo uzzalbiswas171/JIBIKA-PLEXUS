@@ -48,8 +48,9 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
+                    color: Colors.white,
                     border: Border.all(
-                        color: Colors.grey.withOpacity(0.54)
+                        color: Colors.grey
                     )
                 ),
                 child: ListView.builder(
@@ -65,7 +66,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                       child: Container(
                         margin: EdgeInsets.only(left: 5),
                         width: 100,
-                        decoration: BoxDecoration( 
+                        decoration: BoxDecoration(
+                            color: Colors.white,
                           border: Border(
                             bottom: BorderSide(width: 3, color:selected_index==index?Colors.grey :Colors.grey.withOpacity(0.0),style: BorderStyle.solid),
                           ),
@@ -106,6 +108,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
+                  color: Colors.white
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +129,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                                           child: Center(
                                 child: CircleAvatar(
                                   radius: 80,
-                                 // backgroundColor: Colors.white,
+                                 backgroundColor: Colors.white,
                                   child: CircleAvatar(
                                     radius: 50,
                                     backgroundColor: Colors.white,
@@ -159,11 +162,10 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                   child: CircularPercentIndicator(
                                     radius: 67.0,
                                     lineWidth: 16.0,
-                                    percent: 0.88,
+                                    percent: 1,
                                     backgroundColor: Colors.grey.withOpacity(0),
-                                    progressColor: Colors.red,
+                                    progressColor: Colors.indigo,
                                   ),),
-
 
                                 Positioned(
                                   top: 13,
@@ -175,6 +177,19 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                     backgroundColor: Colors.grey.withOpacity(0),
                                     progressColor: Colors.yellow,
                                   ),),
+                                Positioned(
+                                  top: 13,
+                                  left: 23,
+                                  child: CircularPercentIndicator(
+                                    radius: 67.0,
+                                    lineWidth: 16.0,
+                                    percent: 0.88,
+                                    backgroundColor: Colors.grey.withOpacity(0),
+                                    progressColor: Colors.red,
+                                  ),),
+
+
+
 
                                 Positioned(
                                   top: 10,
@@ -220,6 +235,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       ],
                                     ),
                                   ),
+
                                   Container(
                                     height: 22,
                                     child: Row(
@@ -256,6 +272,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 5,),
                                   Container(
                                     height: 22,
                                     child: Row(
@@ -291,6 +308,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 5,),
                                   Container(
                                     height: 22,
                                     child: Row(
@@ -326,6 +344,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 5,),
                                   Container(
                                     height: 22,
                                     child: Row(
@@ -376,7 +395,15 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 15,),
+              Container(
+                height: 300,
+                decoration:BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                  color: Colors.white
+                ),
 
+              )
                
 
             ],
