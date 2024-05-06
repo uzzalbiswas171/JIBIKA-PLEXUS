@@ -1,8 +1,12 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:jibica_plexus/CustomWidget/CustomText/custom_text.dart';
+import 'package:jibica_plexus/CustomWidget/secondpart.dart';
+import 'package:jibica_plexus/CustomWidget/sfastpaet.dart';
+import 'package:jibica_plexus/CustomWidget/thirduppart.dart';
 import 'package:jibica_plexus/constant.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -12,7 +16,6 @@ class MainHomeScreen extends StatefulWidget {
   @override
   State<MainHomeScreen> createState() => _MainHomeScreenState();
 }
-
 class _MainHomeScreenState extends State<MainHomeScreen> {
   List countList=[
     "Employee",
@@ -26,6 +29,37 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     "asset/airplane.png",
     "asset/debt.png",
   ];
+
+  late List<BarChartGroupData> rawBarGroups;
+  late List<BarChartGroupData> showingBarGroups;
+
+  int touchedGroupIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    final barGroup1 = makeGroupData(5, 5, 12);
+    final barGroup2 = makeGroupData(1, 16, 12);
+    final barGroup3 = makeGroupData(2, 18, 5);
+    final barGroup4 = makeGroupData(3, 20, 16);
+    final barGroup5 = makeGroupData(4, 17, 6);
+    final barGroup6 = makeGroupData(5, 19, 1.5);
+    final barGroup7 = makeGroupData(6, 10, 1.5);
+
+    final items = [
+      barGroup1,
+      barGroup2,
+      barGroup3,
+      barGroup4,
+      barGroup5,
+      barGroup6,
+      barGroup7,
+    ];
+
+    rawBarGroups = items;
+
+    showingBarGroups = rawBarGroups;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,362 +73,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: EdgeInsets.only(
-                    top: 15,
-                    bottom: 15
-                ),
-                height: 90,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Colors.grey
-                    )
-                ),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount:countList.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          selected_index=index;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 5),
-                        width: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                          border: Border(
-                            bottom: BorderSide(width: 3, color:selected_index==index?Colors.grey :Colors.grey.withOpacity(0.0),style: BorderStyle.solid),
-                          ),
-                        ),
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.all(5),
-                        child: Stack(
-                          children: [
-                            Column(
-                              children: [
-                                Expanded(
-
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Image.asset("${listimage[index]}",fit: BoxFit.fill,color: appbarBackgroundcollor,),
-                                    )),
-                                CustomText(text: "${countList[index]}", fontSize: 16, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-                              ],
-                            ),
-                            Positioned(
-                              top: 0,
-                                right:5,
-                                child: CircleAvatar(
-                                radius: 13,
-                                backgroundColor: defaultBackgroundColor,
-                                child: CustomText(text: "20", fontSize: 9, fontWeight: FontWeight.w600,color: Colors.red.shade300,),
-                            ))
-                          ],
-                        ),
-                      ),
-                    );
-                  },),
-              ),
-              Container(
-                height: 200,
-                width: double.infinity,
-                margin: EdgeInsets.only(
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Stack(
-                              children: [
-                                Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(11),
-                                      topLeft: Radius.circular(11),
-                                  ),
-                                                        //    color: Colors.greenAccent
-                                                          ),
-                                                          child: Center(
-                                child: CircleAvatar(
-                                  radius: 80,
-                                 backgroundColor: Colors.white,
-                                  child: CircleAvatar(
-                                    radius: 50,
-                                    backgroundColor: Colors.white,
-                                    child: CircleAvatar(
-                                      radius: 45,
-                                      backgroundColor: Colors.black,
-                                      child: CircleAvatar(
-                                        radius: 43,
-                                        backgroundColor: Colors.white,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            CustomText(text: "93%", fontSize: 21, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: barColor,),
-                                            CustomText(text: "Present", fontSize: 15, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.black45,),
-
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                                          ),
-                                                        ),
-
-
-                                Positioned(
-                                  top: 13,
-                                  left: 23,
-                                  child: CircularPercentIndicator(
-                                    radius: 67.0,
-                                    lineWidth: 16.0,
-                                    percent: 1,
-                                    backgroundColor: Colors.grey.withOpacity(0),
-                                    progressColor: Colors.indigo,
-                                  ),),
-
-                                Positioned(
-                                  top: 13,
-                                  left: 23,
-                                  child: CircularPercentIndicator(
-                                    radius: 67.0,
-                                    lineWidth: 16.0,
-                                    percent: 0.95,
-                                    backgroundColor: Colors.grey.withOpacity(0),
-                                    progressColor: Colors.yellow,
-                                  ),),
-                                Positioned(
-                                  top: 13,
-                                  left: 23,
-                                  child: CircularPercentIndicator(
-                                    radius: 67.0,
-                                    lineWidth: 16.0,
-                                    percent: 0.88,
-                                    backgroundColor: Colors.grey.withOpacity(0),
-                                    progressColor: Colors.red,
-                                  ),),
-
-
-
-
-                                Positioned(
-                                  top: 10,
-                                  left: 20,
-                                  child: CircularPercentIndicator(
-                                    radius: 70.0,
-                                    lineWidth: 20.0,
-                                    percent: 0.8,
-                                    backgroundColor: Colors.grey.withOpacity(0),
-                                    progressColor: barColor,
-                                  ),),
-
-                              ],
-                            )),
-                        ///Second part start
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(11),
-                                bottomRight: Radius.circular(11),
-                              ),
-                             // color: Colors.grey
-                          ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    height: 40,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top:8.0),
-                                          child: CustomText(text: "${selected2Datee}", fontSize: 13, fontWeight: FontWeight.w700),
-                                        ),
-                                        IconButton(onPressed: () {
-                                          _select2Date(context);
-                                        }, icon: Icon(Icons.calendar_month,size: 18,)),
-                    
-                    
-                                      ],
-                                    ),
-                                  ),
-
-                                  Container(
-                                    height: 22,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            CustomText(text: "P", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: barColor,),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 5.0),
-                                              child: CustomText(text: "resent", fontSize: 15, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.grey,),
-                                            ),
-                                          ],
-                                        )),
-
-                                        Expanded(
-                                            flex: 2,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Spacer(),
-                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
-                                            ,Spacer(),
-                                            CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: barColor,),
-                                            Spacer(),
-                                          ],
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Container(
-                                    height: 22,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            CustomText(text: "A", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.red.shade300,),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 5.0),
-                                              child: CustomText(text: "bsent", color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-                                            ),
-                                          ],
-                                        )),
-                                        Expanded(
-                                            flex: 2,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Spacer(),
-                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
-                                            ,Spacer(),
-                                            CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.red.shade300),
-                                            Spacer(),
-                                          ],
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Container(
-                                    height: 22,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            CustomText(text: "L", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: barColor.withOpacity(0.5),),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 5.0),
-                                              child: CustomText(text: "eave",color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-                                            ),
-                                          ],
-                                        )),
-                                        Expanded(
-                                            flex: 2,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Spacer(),
-                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
-                                            ,Spacer(),
-                                            CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: barColor.withOpacity(0.5),),
-                                            Spacer(),
-                                          ],
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Container(
-                                    height: 22,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            CustomText(text: "H", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.indigo.withOpacity(0.7),),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 5.0),
-                                              child: CustomText(text: "oliDay",color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-                                            ),
-                                          ],
-                                        )),
-                                        Expanded(
-                                            flex: 2,
-                                            child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Spacer(),
-                                            Container(height: 16,width: 2.5,color: Colors.grey.shade400,)
-                                            ,Spacer(),
-                                            CustomText(text: "155", fontSize: 22, fontWeight: FontWeight.w600,letterSpacing: 0.2,color:  Colors.indigo.withOpacity(0.7),),
-                                            Spacer(),
-                                          ],
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )
-                        )),
-                      ],
-                    ),
-                    SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        CustomText(text: "Active Manpower   ", fontSize: 16,color: Colors.grey, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-                        CustomText(text: "8883", fontSize: 18,color: Colors.red.shade300, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-                      ],
-                    )
-                  ],
-                ),
-              ),
+              FastOartScreen(),
+              SecondhomePartScreen(),
               SizedBox(height: 15,),
               Container(
                 height: 300,
@@ -402,9 +82,168 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                   borderRadius: BorderRadius.circular(11),
                   color: Colors.white
                 ),
+                child: Column(
+                  children: [
+                    Expanded(
+                        flex:1,
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          height: 100 ,child: Row(
+                          children: [
+                            ThirdFastPart(
+                              name: "Payable",
+                              mony: '150',
+                              parpose: "Manpower",
+                            ),
+                            ThirdFastPart(
+                              name: "Daily",
+                              mony: '1500',
+                              parpose: "Salary",
+                            ),
+                            ThirdFastPart(
+                              name: "Cumulative",
+                              mony: '15000',
+                              parpose: "Salary",
+                            ),
+                            Expanded(child: Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(11),
+                                    topLeft: Radius.circular(11)
+                                ),
+                                color: Colors.white,
+                                border: Border(
 
-              )
-               
+
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.all(10),
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(11),
+                                        color: defaultBackgroundColor
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.calendar_month)),
+                                  CustomText(text: "Jun 2024", fontSize: 14, fontWeight: FontWeight.w600)
+
+                                ],
+                              ),
+                            ))
+                          ],
+                        ),
+                        )
+                    ),
+                    Expanded(
+                        flex:2,
+                        child: Container(
+                          child: Row(
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 1.6,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Expanded(
+                                    child: BarChart(
+                                      BarChartData(
+                                        maxY: 20,
+                                        barTouchData: BarTouchData(
+                                          touchTooltipData: BarTouchTooltipData(
+                                            getTooltipColor: ((group) {
+                                              return Colors.grey;
+                                            }),
+                                            getTooltipItem: (a, b, c, d) => null,
+                                          ),
+                                          touchCallback: (FlTouchEvent event, response) {
+                                            if (response == null || response.spot == null) {
+                                              setState(() {
+                                                touchedGroupIndex = -1;
+                                                showingBarGroups = List.of(rawBarGroups);
+                                              });
+                                              return;
+                                            }
+
+                                            touchedGroupIndex = response.spot!.touchedBarGroupIndex;
+
+                                            setState(() {
+                                              if (!event.isInterestedForInteractions) {
+                                                touchedGroupIndex = -1;
+                                                showingBarGroups = List.of(rawBarGroups);
+                                                return;
+                                              }
+                                              showingBarGroups = List.of(rawBarGroups);
+                                              if (touchedGroupIndex != -1) {
+                                                var sum = 0.0;
+                                                for (final rod
+                                                in showingBarGroups[touchedGroupIndex].barRods) {
+                                                  sum += rod.toY;
+                                                }
+                                                final avg = sum /
+                                                    showingBarGroups[touchedGroupIndex]
+                                                        .barRods
+                                                        .length;
+
+                                                showingBarGroups[touchedGroupIndex] =
+                                                    showingBarGroups[touchedGroupIndex].copyWith(
+                                                      barRods: showingBarGroups[touchedGroupIndex]
+                                                          .barRods
+                                                          .map((rod) {
+                                                        return rod.copyWith(
+                                                            toY: avg, color: Colors.greenAccent);
+                                                      }).toList(),
+                                                    );
+                                              }
+                                            });
+                                          },
+                                        ),
+                                        titlesData: FlTitlesData(
+                                          show: true,
+                                          rightTitles: const AxisTitles(
+                                            sideTitles: SideTitles(showTitles: false),
+                                          ),
+                                          topTitles: const AxisTitles(
+                                            sideTitles: SideTitles(showTitles: false),
+                                          ),
+                                          bottomTitles: AxisTitles(
+                                            sideTitles: SideTitles(
+                                              showTitles: true,
+                                              getTitlesWidget: bottomTitles,
+                                              reservedSize: 42,
+                                            ),
+                                          ),
+                                          leftTitles: AxisTitles(
+                                            sideTitles: SideTitles(
+                                              showTitles: true,
+                                              reservedSize: 28,
+                                              interval: 1,
+                                              getTitlesWidget: leftTitles,
+                                            ),
+                                          ),
+                                        ),
+                                        borderData: FlBorderData(
+
+                                          show: false,
+                                        ),
+                                        barGroups: showingBarGroups,
+                                        gridData: const FlGridData(show: false),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 100,)
 
             ],
           ),
@@ -426,4 +265,68 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
       });
     }
   }
+  final double width = 7;
+
+  Widget leftTitles(double value, TitleMeta meta) {
+    const style = TextStyle(
+      color: Color(0xff7589a2),
+      fontWeight: FontWeight.bold,
+      fontSize: 14,
+    );
+    String text;
+    if (value == 0) {
+      text = '1K';
+    } else if (value == 10) {
+      text = '5K';
+    } else if (value == 19) {
+      text = '10K';
+    } else {
+      return Container();
+    }
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 0,
+      child: Text(text, style: style),
+    );
+  }
+
+  Widget bottomTitles(double value, TitleMeta meta) {
+    final titles = <String>['Mn', 'Te', 'Wd', 'Tu', 'Fr', 'St', 'Su'];
+
+    final Widget text = Text(
+      titles[value.toInt()],
+      style: const TextStyle(
+        color: Color(0xff7589a2),
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+      ),
+    );
+
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 16, //margin top
+      child: text,
+    );
+  }
+
+  BarChartGroupData makeGroupData(int x, double y1, double y2) {
+    return BarChartGroupData(
+      barsSpace: 20,
+      x: x,
+      barRods: [
+        BarChartRodData(
+          toY: y1,
+          color: barColor,
+          width: width,
+        ),
+        BarChartRodData(
+          toY: y2,
+          color: CupertinoColors.destructiveRed,
+          width: width,
+        ),
+      ],
+    );
+  }
+
+
 }
