@@ -32,9 +32,9 @@ class ThirdFastPart extends StatefulWidget {
        child: Column(
          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
          children: [
-           CustomText(text: "${widget.name}", fontSize: 15, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
-           CustomText(text: "${widget.mony}", fontSize: 22, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.grey,),
-           CustomText(text: "${widget.parpose}", fontSize: 16, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.grey,),
+           CustomText(text: "${widget.name}", fontSize: 13, fontWeight: FontWeight.w600,letterSpacing: 0.2,),
+           CustomText(text: "${widget.mony}", fontSize: 16, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.grey,),
+           CustomText(text: "${widget.parpose}", fontSize: 12, fontWeight: FontWeight.w600,letterSpacing: 0.2,color: Colors.grey,),
          ],
        ),
      ));

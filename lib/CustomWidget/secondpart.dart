@@ -31,6 +31,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
             children: [
               Expanded(
                   child: Stack(
+                    alignment: Alignment.center,
                     children: [
                       Container(
                         decoration: BoxDecoration(
@@ -81,7 +82,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                       ),
                       Positioned(
                         top: 13,
-                        left: 23,
+                         // left: 23,
                         child: CircularPercentIndicator(
                           radius: 67.0,
                           lineWidth: 16.0,
@@ -92,7 +93,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                       ),
                       Positioned(
                         top: 13,
-                        left: 23,
+                      //  left: 23,
                         child: CircularPercentIndicator(
                           radius: 67.0,
                           lineWidth: 16.0,
@@ -103,7 +104,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                       ),
                       Positioned(
                         top: 13,
-                        left: 23,
+                     //   left: 23,
                         child: CircularPercentIndicator(
                           radius: 67.0,
                           lineWidth: 16.0,
@@ -114,7 +115,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                       ),
                       Positioned(
                         top: 10,
-                        left: 20,
+                    //    left: 20,
                         child: CircularPercentIndicator(
                           radius: 70.0,
                           lineWidth: 20.0,
@@ -170,7 +171,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                    flex: 1,
+                                    flex: 2,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -198,7 +199,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                                       ],
                                     )),
                                 Expanded(
-                                    flex: 2,
+                                    flex: 3,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -226,7 +227,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 2,
                           ),
                           Container(
                             height: 22,
@@ -235,7 +236,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                    flex: 1,
+                                    flex: 2,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -263,7 +264,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                                       ],
                                     )),
                                 Expanded(
-                                    flex: 2,
+                                    flex: 3,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -290,7 +291,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 2,
                           ),
                           Container(
                             height: 22,
@@ -299,7 +300,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                    flex: 1,
+                                    flex: 2,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -327,7 +328,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                                       ],
                                     )),
                                 Expanded(
-                                    flex: 2,
+                                    flex: 3,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -355,7 +356,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 2,
                           ),
                           Container(
                             height: 22,
@@ -364,7 +365,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                    flex: 1,
+                                    flex: 2,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,
@@ -392,7 +393,7 @@ class _SecondhomePartScreenState extends State<SecondhomePartScreen> {
                                       ],
                                     )),
                                 Expanded(
-                                    flex: 2,
+                                    flex: 3,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.start,

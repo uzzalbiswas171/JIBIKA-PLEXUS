@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:jibica_plexus/CustomWidget/CustomText/custom_text.dart';
 import 'package:jibica_plexus/CustomWidget/secondpart.dart';
@@ -78,6 +82,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
               SizedBox(height: 15,),
               Container(
                 height: 300,
+                width: double.infinity,
                 decoration:BoxDecoration(
                   borderRadius: BorderRadius.circular(11),
                   color: Colors.white
@@ -102,39 +107,40 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                             ),
                             ThirdFastPart(
                               name: "Cumulative",
-                              mony: '15000',
-                              parpose: "Salary",
+                              mony: '1500',
+                              parpose: "Salary bd",
                             ),
-                            Expanded(child: Container(
-                              height: 100,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(11),
-                                    topLeft: Radius.circular(11)
-                                ),
-                                color: Colors.white,
-                                border: Border(
+                            Container(
+
+                            height: 100,
+                            width: 80,
+                            decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(11),
+                                topLeft: Radius.circular(11)
+                            ),
+                            color: Colors.white,
+                            border: Border(
 
 
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.all(10),
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(11),
-                                        color: defaultBackgroundColor
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Icon(Icons.calendar_month)),
-                                  CustomText(text: "Jun 2024", fontSize: 14, fontWeight: FontWeight.w600)
+                            ),
+                                                          ),
+                                                          child: Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(11),
+                                    color: defaultBackgroundColor
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.calendar_month)),
+                              CustomText(text: "Jun 2024", fontSize: 14, fontWeight: FontWeight.w600)
 
-                                ],
-                              ),
-                            ))
+                            ],
+                                                          ),
+                                                        )
                           ],
                         ),
                         )
@@ -148,101 +154,389 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                 aspectRatio: 1.6,
                                 child: Padding(
                                   padding: const EdgeInsets.all(20),
-                                  child: Expanded(
-                                    child: BarChart(
-                                      BarChartData(
-                                        maxY: 20,
-                                        barTouchData: BarTouchData(
-                                          touchTooltipData: BarTouchTooltipData(
-                                            getTooltipColor: ((group) {
-                                              return Colors.grey;
-                                            }),
-                                            getTooltipItem: (a, b, c, d) => null,
-                                          ),
-                                          touchCallback: (FlTouchEvent event, response) {
-                                            if (response == null || response.spot == null) {
-                                              setState(() {
-                                                touchedGroupIndex = -1;
-                                                showingBarGroups = List.of(rawBarGroups);
-                                              });
+                                  child: BarChart(
+                                    BarChartData(
+                                      maxY: 20,
+                                      barTouchData: BarTouchData(
+                                        touchTooltipData: BarTouchTooltipData(
+                                          getTooltipColor: ((group) {
+                                            return Colors.grey;
+                                          }),
+                                          getTooltipItem: (a, b, c, d) => null,
+                                        ),
+                                        touchCallback: (FlTouchEvent event, response) {
+                                          if (response == null || response.spot == null) {
+                                            setState(() {
+                                              touchedGroupIndex = -1;
+                                              showingBarGroups = List.of(rawBarGroups);
+                                            });
+                                            return;
+                                          }
+
+                                          touchedGroupIndex = response.spot!.touchedBarGroupIndex;
+
+                                          setState(() {
+                                            if (!event.isInterestedForInteractions) {
+                                              touchedGroupIndex = -1;
+                                              showingBarGroups = List.of(rawBarGroups);
                                               return;
                                             }
-
-                                            touchedGroupIndex = response.spot!.touchedBarGroupIndex;
-
-                                            setState(() {
-                                              if (!event.isInterestedForInteractions) {
-                                                touchedGroupIndex = -1;
-                                                showingBarGroups = List.of(rawBarGroups);
-                                                return;
+                                            showingBarGroups = List.of(rawBarGroups);
+                                            if (touchedGroupIndex != -1) {
+                                              var sum = 0.0;
+                                              for (final rod
+                                              in showingBarGroups[touchedGroupIndex].barRods) {
+                                                sum += rod.toY;
                                               }
-                                              showingBarGroups = List.of(rawBarGroups);
-                                              if (touchedGroupIndex != -1) {
-                                                var sum = 0.0;
-                                                for (final rod
-                                                in showingBarGroups[touchedGroupIndex].barRods) {
-                                                  sum += rod.toY;
-                                                }
-                                                final avg = sum /
-                                                    showingBarGroups[touchedGroupIndex]
+                                              final avg = sum /
+                                                  showingBarGroups[touchedGroupIndex]
+                                                      .barRods
+                                                      .length;
+
+                                              showingBarGroups[touchedGroupIndex] =
+                                                  showingBarGroups[touchedGroupIndex].copyWith(
+                                                    barRods: showingBarGroups[touchedGroupIndex]
                                                         .barRods
-                                                        .length;
-
-                                                showingBarGroups[touchedGroupIndex] =
-                                                    showingBarGroups[touchedGroupIndex].copyWith(
-                                                      barRods: showingBarGroups[touchedGroupIndex]
-                                                          .barRods
-                                                          .map((rod) {
-                                                        return rod.copyWith(
-                                                            toY: avg, color: Colors.greenAccent);
-                                                      }).toList(),
-                                                    );
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        titlesData: FlTitlesData(
-                                          show: true,
-                                          rightTitles: const AxisTitles(
-                                            sideTitles: SideTitles(showTitles: false),
-                                          ),
-                                          topTitles: const AxisTitles(
-                                            sideTitles: SideTitles(showTitles: false),
-                                          ),
-                                          bottomTitles: AxisTitles(
-                                            sideTitles: SideTitles(
-                                              showTitles: true,
-                                              getTitlesWidget: bottomTitles,
-                                              reservedSize: 42,
-                                            ),
-                                          ),
-                                          leftTitles: AxisTitles(
-                                            sideTitles: SideTitles(
-                                              showTitles: true,
-                                              reservedSize: 28,
-                                              interval: 1,
-                                              getTitlesWidget: leftTitles,
-                                            ),
-                                          ),
-                                        ),
-                                        borderData: FlBorderData(
-
-                                          show: false,
-                                        ),
-                                        barGroups: showingBarGroups,
-                                        gridData: const FlGridData(show: false),
+                                                        .map((rod) {
+                                                      return rod.copyWith(
+                                                          toY: avg, color: Colors.greenAccent);
+                                                    }).toList(),
+                                                  );
+                                            }
+                                          });
+                                        },
                                       ),
+                                      titlesData: FlTitlesData(
+                                        show: true,
+                                        rightTitles: const AxisTitles(
+                                          sideTitles: SideTitles(showTitles: false),
+                                        ),
+                                        topTitles: const AxisTitles(
+                                          sideTitles: SideTitles(showTitles: false),
+                                        ),
+                                        bottomTitles: AxisTitles(
+                                          sideTitles: SideTitles(
+                                            showTitles: true,
+                                            getTitlesWidget: bottomTitles,
+                                            reservedSize: 42,
+                                          ),
+                                        ),
+                                        leftTitles: AxisTitles(
+                                          sideTitles: SideTitles(
+                                            showTitles: true,
+                                            reservedSize: 28,
+                                            interval: 1,
+                                            getTitlesWidget: leftTitles,
+                                          ),
+                                        ),
+                                      ),
+                                      borderData: FlBorderData(
+
+                                        show: false,
+                                      ),
+                                      barGroups: showingBarGroups,
+                                      gridData: const FlGridData(show: false),
                                     ),
                                   ),
                                 ),
                               )
                             ],
                           ),
-                        )),
+                        )
+                    ),
                   ],
                 ),
               ),
+              SizedBox(height: 15,),
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration:BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                  color: Colors.white
+                ),
+                child: Column(
+                  children: [
+                    Center(child: CustomText(text: "Salary camparison Chart Jan-2023", fontSize: 15, fontWeight: FontWeight.w600),),
 
+                    Expanded(
+                        flex:2,
+                        child: Container(
+                          child: Row(
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 1.6,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: BarChart(
+                                    BarChartData(
+                                      maxY: 20,
+                                      barTouchData: BarTouchData(
+                                        touchTooltipData: BarTouchTooltipData(
+                                          getTooltipColor: ((group) {
+                                            return Colors.grey;
+                                          }),
+                                          getTooltipItem: (a, b, c, d) => null,
+                                        ),
+                                        touchCallback: (FlTouchEvent event, response) {
+                                          if (response == null || response.spot == null) {
+                                            setState(() {
+                                              touchedGroupIndex = -1;
+                                              showingBarGroups = List.of(rawBarGroups);
+                                            });
+                                            return;
+                                          }
+
+                                          touchedGroupIndex = response.spot!.touchedBarGroupIndex;
+
+                                          setState(() {
+                                            if (!event.isInterestedForInteractions) {
+                                              touchedGroupIndex = -1;
+                                              showingBarGroups = List.of(rawBarGroups);
+                                              return;
+                                            }
+                                            showingBarGroups = List.of(rawBarGroups);
+                                            if (touchedGroupIndex != -1) {
+                                              var sum = 0.0;
+                                              for (final rod
+                                              in showingBarGroups[touchedGroupIndex].barRods) {
+                                                sum += rod.toY;
+                                              }
+                                              final avg = sum /
+                                                  showingBarGroups[touchedGroupIndex]
+                                                      .barRods
+                                                      .length;
+
+                                              showingBarGroups[touchedGroupIndex] =
+                                                  showingBarGroups[touchedGroupIndex].copyWith(
+                                                    barRods: showingBarGroups[touchedGroupIndex]
+                                                        .barRods
+                                                        .map((rod) {
+                                                      return rod.copyWith(
+                                                          toY: avg, color: Colors.greenAccent);
+                                                    }).toList(),
+                                                  );
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      titlesData: FlTitlesData(
+                                        show: true,
+                                        rightTitles: const AxisTitles(
+                                          sideTitles: SideTitles(showTitles: false),
+                                        ),
+                                        topTitles: const AxisTitles(
+                                          sideTitles: SideTitles(showTitles: false),
+                                        ),
+                                        bottomTitles: AxisTitles(
+                                          sideTitles: SideTitles(
+                                            showTitles: true,
+                                            getTitlesWidget: bottomTitles,
+                                            reservedSize: 42,
+                                          ),
+                                        ),
+                                        leftTitles: AxisTitles(
+                                          sideTitles: SideTitles(
+                                            showTitles: true,
+                                            reservedSize: 28,
+                                            interval: 1,
+                                            getTitlesWidget: leftTitles,
+                                          ),
+                                        ),
+                                      ),
+                                      borderData: FlBorderData(
+
+                                        show: false,
+                                      ),
+                                      barGroups: showingBarGroups,
+                                      gridData: const FlGridData(show: false),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15,),
+              Container(
+                height: 140,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                  color: Color(0xffc7ded6),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomText(text: "Today's Selection", fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    Container(
+                      height: 102,
+                      width: double.infinity,
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                        return Container(
+                          height: 100,
+                          width: 205,
+                          margin: EdgeInsets.only(left: 10),
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(11),
+                            color: Colors.white,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                children: [
+                                  Positioned(
+                                    top: -4,
+                                    left: -4,
+                                    child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    width: 55,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(9),
+                                      color: Colors.red.shade300,
+                                     ),
+
+                                  ),),
+
+                                  Positioned(child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    width: 60,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(9),
+                                        image: DecorationImage(image: AssetImage("asset/profile5.PNG"),fit: BoxFit.fill,)
+                                    ),
+
+                                  ),),
+                                ],
+                              ),
+                              Expanded(child: Container(
+                                padding: EdgeInsets.all(4),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                   CustomText(text: "Hafizur Rahaman", fontSize: 14, fontWeight: FontWeight.w700)
+                                   , Text(  "Dummy text of the printing Lorem and typesetting .Lorem", textAlign: TextAlign.justify ,maxLines: 4,style: GoogleFonts.poppins(
+                                      fontSize: 12.2,fontWeight: FontWeight.w500,
+
+                                    ),)
+                                  ],
+                                ),
+                              ))
+                            ],
+                          ),
+                        );
+                      },),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 15,),
+              Container(
+                height: 160,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                  color: Colors.white
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          CustomText(text: "20 ", fontSize: 15, fontWeight: FontWeight.w600,color: Colors.red,),
+                          CustomText(text: "Person on leave", fontSize: 12, fontWeight: FontWeight.w600,color: Colors.grey,),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 120,
+                      width: double.infinity,
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                        return Container(
+                          height: 100,
+                          width: 80,
+                          margin: EdgeInsets.only(left: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(11),
+                            color: Color(0xedecf1ec)
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(image: AssetImage("asset/profile3.PNG"),fit: BoxFit.fill)
+                                ),
+                              )),
+                              CustomText(text: "66799", fontSize: 15, color: barColor,fontWeight: FontWeight.w800,letterSpacing: 0.2,)
+                            ],
+                          )
+                        );
+                      },),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 15,),
+              Container(
+                height: 110,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(right: 10),
+                    height: 110,
+                    width: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(11),
+                      //  color: Colors.red,
+                    color: Colors.primaries[Random().nextInt(Colors.primaries.length)].withOpacity(0.4),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(image: AssetImage("asset/user.png"),fit: BoxFit.fill,)
+                          ),
+                        ),
+                        SizedBox(height: 5,),
+                        CustomText(text: "455H", fontSize: 17, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.white,)
+                        ,CustomText(text: "Total Active", fontSize: 11, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.white,)
+                        ,CustomText(text: "Employee", fontSize: 11, fontWeight: FontWeight.bold,letterSpacing: 0.2,color: Colors.white,)
+                      ],
+                    ),
+                  );
+                },)
+              ),
               SizedBox(height: 100,)
 
             ],
